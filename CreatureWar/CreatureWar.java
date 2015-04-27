@@ -11,6 +11,7 @@ public class CreatureWar
     private ArrayList<Creature> sideOne;
     private ArrayList<Creature> sideTwo;
     public Random r = new Random();
+    int i = r.nextInt(10)+5;
     /**
      * Constructor for objects of class CreatureWar
      */
@@ -18,6 +19,7 @@ public class CreatureWar
     {
             sideOne = new ArrayList<Creature>();
             sideTwo = new ArrayList<Creature>();
+            
     }
 
     /**
@@ -26,62 +28,43 @@ public class CreatureWar
      * @param  y   a sample parameter for a method
      * @return     the sum of x and y 
    */
-    public void addCreature()
+    public Creature addCreature()
     {
+            Random r = new Random();
             int c1 = r.nextInt(4);
-            int c2 = r.nextInt(4);
             if(c1 == 0)
             {
-               sideOne.add(new Human()); 
+               return new Human(); 
             }
             if(c1 == 1)
             {
-                sideOne.add(new Elf()); 
+                return new Elf(); 
             }
             if(c1 == 2)
             {
-                sideOne.add(new Balrog()); 
+                return new Balrog(); 
             }
-            if(c1 == 3)
-            {
-                sideOne.add(new CyberDemon()); 
-            }
-            
-            if(c2 == 0)
-            {
-               sideTwo.add(new Human()); 
-            }
-            if(c2 == 1)
-            {
-                sideTwo.add(new Elf()); 
-            }
-            if(c2 == 2)
-            {
-                sideTwo.add(new Balrog()); 
-            }
-            if(c2 == 3)
-            {
-                sideTwo.add(new CyberDemon()); 
-            }
+            return new CyberDemon(); 
     }
-   /**
-   public void addCreature(Creature creature)
+ 
+   public void battle()
    {
-        sideOne.add(creature);
-        sideTwo.add(creature);
-   }*/
-    public void battle(Creature c1, Creature c2)
-    {
-        c1.takeDamage(c2.attack());
-        c2.takeDamage(c1.attack());
-    }
-    public static void main(String args[])
-    {
-        Random r = new Random();
-        int i = r.nextInt(10)+5;
+       int j = 0;
+       while(j<i)
+       {
+           while(sideOne.get(j).isAlive() == true && sideTwo.get(j).isAlive() == true)
+           {   
+               sideOne.get(j).takeDamage(sideTwo.get(j).attack());
+               sideTwo.get(j).takeDamage(sideOne.get(j).attack());
+           }
+        }
+   }
+   public void createArmy()
+   {
         for(int k = 0; k < i; k++)
         {
-            sideTwo.addCreature();
+            sideOne.add(addCreature());
+            sideTwo.add(addCreature());
         }
-    }
+   }
 }
