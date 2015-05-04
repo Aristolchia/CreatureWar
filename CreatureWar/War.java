@@ -26,6 +26,6 @@ public class War
     {
         CreatureWar cW = new CreatureWar();
         cW.createArmy();
-        
+        cW.battle();
     }
 }
