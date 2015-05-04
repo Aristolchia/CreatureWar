@@ -11,7 +11,7 @@ public class Human extends Creature
   }
   
   Human(int str, int hp){
-      super(hp, str);
+      super(rand.nextInt(13)+5, rand.nextInt(25)+5);
   }
   
 }
