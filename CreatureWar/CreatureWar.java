@@ -50,13 +50,35 @@ public class CreatureWar
    public void battle()
    {
        int j = 0;
-       while(j<i)
+       int k = 0;
+       while(j<i || k<i)
        {
-           while(sideOne.get(j).isAlive() == true && sideTwo.get(j).isAlive() == true)
+           sideOne.get(j).takeDamage(sideTwo.get(k).attack());
+           System.out.println("Unit " + k + "From Army Two Deals " + sideTwo.get(k).attack() + "Damage to Unit " + j + "in Army One");
+           sideTwo.get(k).takeDamage(sideOne.get(j).attack());
+           System.out.println("Unit " + j + "From Army One Deals " + sideTwo.get(j).attack() + "Damage to Unit " + k + "in Army Two");
+           if(sideOne.get(j).isAlive() != true)
            {   
-               sideOne.get(j).takeDamage(sideTwo.get(j).attack());
-               sideTwo.get(j).takeDamage(sideOne.get(j).attack());
+               System.out.println("Unit " + j + "From Army One Has Died!");
+               j++;
            }
+           if(sideTwo.get(k).isAlive() != true)
+           {   
+               System.out.println("Unit " + k + "From Army Two Has Died!");
+               k++;
+           }
+        }
+        if(j<k)
+        {
+            System.out.println("Army Two Wins!");
+        }
+        else if(j>k)
+        {
+            System.out.println("Army One Wins!");
+        }
+        else
+        {
+            System.out.println("Its a Draw!");
         }
    }
    public void createArmy()
